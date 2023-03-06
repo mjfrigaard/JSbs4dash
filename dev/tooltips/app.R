@@ -90,7 +90,7 @@ mod_tooltip_var_input_ui <- function(id) {
 dev_ui <- function(request) {
   shiny::tagList(
     shiny::fluidPage(
-      shiny::tags$h1("JSbs4dash:", code("hover-info")),
+      shiny::tags$h1("JSbs4dash:", code("tooltips")),
       shiny::sidebarLayout(
         shiny::sidebarPanel(
           # use mod_tooltip_var_input_ui -----
