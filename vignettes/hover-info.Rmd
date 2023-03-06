@@ -1,0 +1,19 @@
+---
+title: "Create hover info (i)"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Create hover info (i)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r pkgs, message=FALSE, warning=FALSE}
+library(JSbs4dash)
+```

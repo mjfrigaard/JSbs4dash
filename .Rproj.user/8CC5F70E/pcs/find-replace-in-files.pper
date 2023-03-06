@@ -1,0 +1,17 @@
+{
+    "dialog-state": {
+        "query": "get_golem_wd",
+        "path": "",
+        "regex": false,
+        "caseSensitive": true,
+        "wholeWord": true,
+        "filePatterns": [],
+        "useGitGrep": false,
+        "excludeGitIgnore": true,
+        "excludeFilePatterns": [],
+        "resultsCount": 1,
+        "errorCount": 0,
+        "replaceErrors": "",
+        "projectRelative": true
+    }
+}
