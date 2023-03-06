@@ -32,8 +32,9 @@ ui <- bs4Dash::dashboardPage(
         tabName = "p1",
         shiny::fluidRow(
           bs4Dash::sortable(
-            bs4Dash::box(title = "box 1",
-              width = 12
+            bs4Dash::box(title = "Page 1: static image",
+              width = 12,
+              shiny::tags$img(src = "www/shiny.png")
               )
           )
         )
@@ -42,11 +43,12 @@ ui <- bs4Dash::dashboardPage(
         tabName = "p2",
         shiny::fluidRow(
           bs4Dash::sortable(
-            bs4Dash::box(title = "box 2",
+            bs4Dash::box(
+              title = "Page 2: modules",
               width = 12,
-              column(width = 4, offset = 4,
+              shiny::column(width = 4, offset = 4,
                 mod_var_input_ui("vars")),
-              column(width = 12,
+              shiny::column(width = 12,
                 mod_plot_ui("plot"))
               )
           )
@@ -54,7 +56,7 @@ ui <- bs4Dash::dashboardPage(
       ),
       bs4Dash::tabItem(tabName = "p3",
         shiny::fluidRow(
-          bs4Dash::box(title = "box 2", width = 12
+          bs4Dash::box(title = "Page 3: empty box", width = 12
               )
         )
         )
