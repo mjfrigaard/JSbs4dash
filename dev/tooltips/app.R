@@ -98,7 +98,7 @@ dev_ui <- function(request) {
         ),
         shiny::mainPanel(
           # add shiny hex in www/
-          shiny::tags$img(src = "www/shiny.png"),
+          shiny::tags$img(src = "shiny.png"),
           JSbs4dash::mod_plot_ui("plot")
         )
       )
