@@ -21,7 +21,7 @@ toolTipApp <- function() {
         ),
         shiny::mainPanel(
           # add shiny hex in www/
-          shiny::tags$img(src = "shiny.png"),
+          shiny::tags$img(src = "https://raw.githubusercontent.com/mjfrigaard/JSbs4dash/main/inst/app/www/shiny.png"),
           JSbs4dash::mod_plot_ui("plot")
         )
       )
