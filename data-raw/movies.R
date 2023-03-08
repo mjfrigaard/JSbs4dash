@@ -1,3 +1,3 @@
 ## code to prepare `movies` dataset goes here
-load("data-raw/movies.RData")
+load("inst/extdata/movies.RData")
 usethis::use_data(movies, overwrite = TRUE)

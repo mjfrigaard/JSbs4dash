@@ -1,9 +1,14 @@
-library(shiny)
-library(JSbs4dash)
-library(shinyBS)
-
-
-# mod_tooltip_var_input_ui --------------------------------------------------
+#' Create UI inputs with tool tips
+#'
+#' @param id module ID
+#'
+#' @return UI module function for tooltip app
+#' @export mod_tooltip_var_input_ui
+#'
+#' @importFrom shiny NS tagList
+#' @importFrom shiny selectInput sliderInput textInput
+#' @importFrom shinyBS bsTooltip
+#'
 mod_tooltip_var_input_ui <- function(id) {
   ns <- shiny::NS(id)
   shiny::tagList(
@@ -86,79 +91,3 @@ mod_tooltip_var_input_ui <- function(id) {
      options = list(container = "body")),
   )
 }
-
-dev_ui <- function(request) {
-  shiny::tagList(
-    shiny::fluidPage(
-      shiny::tags$h1("JSbs4dash:", code("tooltips")),
-      shiny::sidebarLayout(
-        shiny::sidebarPanel(
-          # use mod_tooltip_var_input_ui -----
-          mod_tooltip_var_input_ui("vars")
-        ),
-        shiny::mainPanel(
-          # add shiny hex in www/
-          shiny::tags$img(src = "shiny.png"),
-          JSbs4dash::mod_plot_ui("plot")
-        )
-      )
-    )
-  )
-}
-
-dev_server <- function(input, output, session) {
-  # Your application server logic
-   selected_vars <- JSbs4dash::mod_var_input_server("vars")
-   JSbs4dash::mod_plot_server("plot", var_inputs = selected_vars)
-}
-
-shinyApp(
- ui = dev_ui, server = dev_server)
-#
-# shinyApp(
-#  ui =
-#  fluidPage(
-#    sidebarLayout(
-#      sidebarPanel(
-#        sliderInput("bins",
-#                    "Number of bins:",
-#                    min = 1,
-#                    max = 50,
-#                    value = 30),
-#        bsTooltip("bins",
-#          "The wait times will be broken into this many equally spaced bins",
-#          "right",
-#          options = list(container = "body"))
-#      ),
-#      mainPanel(
-#        plotOutput("distPlot")
-#      )
-#    )
-#  ),
-#  server =
-#  function(input, output, session) {
-#
-#    output$distPlot <- renderPlot({
-#
-#      # generate bins based on input$bins from ui.R
-#      x    <- faithful[, 2]
-#      bins <- seq(min(x), max(x), length.out = input$bins + 1)
-#
-#      # draw the histogram with the specified number of bins
-#      hist(x, breaks = bins, col = 'darkgray', border = 'white')
-#
-#    })
-#
-#    addPopover(session = session, "distPlot", "Data", content =
-#        paste0("
-# Waiting time between ",
-#      "eruptions and the duration of the eruption for the Old Faithful geyser ",
-#      "in Yellowstone National Park, Wyoming, USA.
-#
-# Azzalini, A. and ",
-#      "Bowman, A. W. (1990). A look at some data on the Old Faithful geyser. ",
-#      "Applied Statistics 39, 357-365.
-#
-# "), trigger = 'click')
-#  }
-# )

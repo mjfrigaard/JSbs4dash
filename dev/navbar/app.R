@@ -5,9 +5,10 @@ source("mod_display_base.R")
 source("mod_aes_vars.R")
 source("mod_display_aes.R")
 source("mod_title.R")
+source("mod_display_title.R")
 
 
-# UI ---------------------------------------------------------------------
+# UI ------------------------------------------------------------
 ui <- bs4Dash::dashboardPage(
   title = code("navbar"),
   header = dashboardHeader(
@@ -73,7 +74,14 @@ ui <- bs4Dash::dashboardPage(
           bs4Dash::box(
             title = "Enter graph title",
             width = 12,
-            mod_title_ui("title_inputs")
+            shiny::column(
+              width = 12,
+            mod_title_ui(id = "title_input")
+              ),
+            shiny::column(
+              width = 12,
+              mod_display_title_ui(id = "display_p3")
+            )
           )
         )
       )
@@ -82,7 +90,7 @@ ui <- bs4Dash::dashboardPage(
   controlbar = bs4Dash::dashboardControlbar()
 )
 
-# server ------------------------------------------------------------------
+# server --------------------------------------------------------
 
 server <- function(input, output) {
 
@@ -94,9 +102,16 @@ server <- function(input, output) {
 
   aes_vars <- mod_aes_vars_server(id = "aes_inputs")
 
-  mod_display_aes_server("display_p2", aes_vars, base_obj)
+  aes_obj <- mod_display_aes_server(id = "display_p2",
+                                    graph_inputs = aes_vars,
+                                    gg_obj = base_obj)
 
+  plot_title <- mod_title_server("title_input")
 
+  mod_display_title_server(id = "display_p3",
+                           title_text = plot_title,
+                           graph_inputs = base_vars,
+                           gg_obj = aes_obj)
 
 }
 

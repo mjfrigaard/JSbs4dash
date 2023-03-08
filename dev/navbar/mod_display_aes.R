@@ -44,5 +44,16 @@ mod_display_aes_server <- function(id, graph_inputs, gg_obj) {
     }) |>
       bindEvent(layer_aes())
 
+    return(
+      list(
+        gg_obj = shiny::reactive({
+          plot_scatter_aes(
+            gg_obj = gg_obj$gg_obj(),
+            alpha_var = graph_inputs$alpha(),
+            size_var = graph_inputs$size())
+        })
+      )
+    )
+
   })
 }
