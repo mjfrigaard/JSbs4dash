@@ -15,7 +15,9 @@ bs4DNavbarMenu(..., id = NULL)
 navbar menu (HTML)
 }
 \description{
-Create Navbar Menu (in bs4Dash)
+This is a standard navbar menu in bs4Dash covered in this
+    GitHub comment/issue:
+    https://github.com/RinteRface/bs4Dash/issues/108#issuecomment-772101031
 }
 \examples{
 require(bs4Dash)

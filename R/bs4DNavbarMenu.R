@@ -3,6 +3,11 @@
 #' @param ... inherited arguments
 #' @param id id for menu
 #'
+#' @description This is a standard navbar menu in bs4Dash covered in this
+#'     GitHub comment/issue:
+#'     https://github.com/RinteRface/bs4Dash/issues/108#issuecomment-772101031
+#'
+#'
 #' @return navbar menu (HTML)
 #' @export bs4DNavbarMenu
 #'
