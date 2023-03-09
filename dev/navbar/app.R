@@ -45,6 +45,21 @@ ui <- bs4Dash::dashboardPage(
               mod_base_vars_ui("graph_inputs"),
               shiny::tags$br(),
               mod_display_base_ui("display_p1")
+            ),
+            # put in UI ----
+            bs4Dash::box(icon = shiny::icon("react"),
+              width = 12,
+              title =
+                shiny::tags$p(tags$code("p1"),
+                  tags$code("values")),
+              collapsible = TRUE,
+              collapsed = TRUE,
+              shiny::fluidRow(
+                shiny::column(
+                  width = 12,
+                  shiny::verbatimTextOutput("p1")
+                )
+              )
             )
           )
         )
@@ -72,12 +87,12 @@ ui <- bs4Dash::dashboardPage(
         tabName = "p3",
         shiny::fluidRow(
           bs4Dash::box(
-            title = "Enter graph title",
+            title = "Graph title",
             width = 12,
             shiny::column(
               width = 12,
-            mod_title_ui(id = "title_input")
-              ),
+              mod_title_ui(id = "title_input")
+            ),
             shiny::column(
               width = 12,
               mod_display_title_ui(id = "display_p3")
@@ -93,26 +108,37 @@ ui <- bs4Dash::dashboardPage(
 # server --------------------------------------------------------
 
 server <- function(input, output) {
+  # put in server ----
+  output$p1 <- shiny::renderPrint({
+    vals <- shiny::reactiveValuesToList(
+      x = input, all.names = TRUE
+    )
+    print(vals)
+  })
 
   base_vars <- mod_base_vars_server("graph_inputs")
 
   base_obj <- mod_display_base_server(
-                              id = "display_p1",
-                              graph_inputs = base_vars)
+    id = "display_p1",
+    graph_inputs = base_vars
+  )
 
   aes_vars <- mod_aes_vars_server(id = "aes_inputs")
 
-  aes_obj <- mod_display_aes_server(id = "display_p2",
-                                    graph_inputs = aes_vars,
-                                    gg_obj = base_obj)
+  aes_obj <- mod_display_aes_server(
+    id = "display_p2",
+    graph_inputs = aes_vars,
+    gg_obj = base_obj
+  )
 
   plot_title <- mod_title_server("title_input")
 
-  mod_display_title_server(id = "display_p3",
-                           title_text = plot_title,
-                           graph_inputs = base_vars,
-                           gg_obj = aes_obj)
-
+  mod_display_title_server(
+    id = "display_p3",
+    title_text = plot_title,
+    graph_inputs = base_vars,
+    gg_obj = aes_obj
+  )
 }
 
 shiny::shinyApp(ui = ui, server = server)

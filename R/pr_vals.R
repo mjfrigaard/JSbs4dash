@@ -12,19 +12,36 @@
 #' # prnt_rvals("dev")
 prnt_rvals <- function(id) {
   ui <- "\n\n# put in UI ----
-          shiny::fluidRow(
-            shiny::column(width = 12,
-              shiny::verbatimTextOutput(
-                shiny::NS(namespace = id, id = '{id}'))
-                  )
-                )"
+      bs4Dash::box(icon = shiny::icon('robot'),
+        width = 12,
+        title =
+          shiny::tags$p(tags$code('{id}'),
+            tags$code('values')),
+        collapsible = TRUE,
+        collapsed = TRUE,
+        shiny::fluidRow(
+          shiny::column(
+            width = 12,
+          shiny::verbatimTextOutput(
+            outputId = shiny::NS(namespace = id, id = '{id}'))
+          )
+        )
+      )"
   server <- "\n\n# put in server ----
-              output$dev <- shiny::renderPrint({{
-                vals <- shiny::reactiveValuesToList(x = input, all.names = TRUE)
-                  print(vals)
-                }})\n\n"
+    output${id} <- shiny::renderPrint({{
+        vals <- shiny::reactiveValuesToList(
+                  x = input, all.names = TRUE)
+          print(vals)
+        }})\n\n"
   rstudioapi::insertText(glue::glue(ui, server))
 }
+
+
+
+
+
+
+
 
 
 

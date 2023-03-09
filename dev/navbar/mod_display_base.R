@@ -9,6 +9,8 @@ plot_scatter_xyz <- function(df, x_var, y_var, col_var) {
   )
 }
 
+
+
 mod_display_base_ui <- function(id) {
   ns <- shiny::NS(id)
   shiny::tagList(
@@ -35,13 +37,22 @@ mod_display_base_ui <- function(id) {
         )
       )
     ),
-    shiny::fluidRow(
-      shiny::column(
+# put in UI ----
+      bs4Dash::box(icon = shiny::icon('react'),
         width = 12,
-        shiny::tags$code("dev_vals"),
-        shiny::verbatimTextOutput(outputId = ns("dev_vals"))
+        title =
+          shiny::tags$p(tags$code('display'),
+            tags$code('values')),
+        collapsible = TRUE,
+        collapsed = TRUE,
+        shiny::fluidRow(
+          shiny::column(
+            width = 12,
+          shiny::verbatimTextOutput(
+            outputId = shiny::NS(namespace = id, id = 'display'))
+          )
+        )
       )
-    ),
   )
 }
 
@@ -66,17 +77,9 @@ mod_display_base_server <- function(id, graph_inputs) {
       )
     })
 
-    output$dev_vals <- shiny::renderPrint({
-      class(
-        base_layer()
-      )
-    })
-
     output$scatterplot <- renderPlot({
-
       base_layer() +
         ggplot2::geom_point()
-
     })
 
     return(
@@ -97,6 +100,13 @@ mod_display_base_server <- function(id, graph_inputs) {
         })
         )
       )
+
+    # put in server ----
+    output$display <- shiny::renderPrint({
+        vals <- shiny::reactiveValuesToList(
+                  x = input, all.names = TRUE)
+          print(vals)
+        })
 
   })
 }

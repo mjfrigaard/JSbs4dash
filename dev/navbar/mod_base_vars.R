@@ -29,7 +29,7 @@ mod_base_vars_ui <- function(id) {
             "Audience Score" = "audience_score",
             "Runtime" = "runtime"
           ),
-          selected = "critics_score"
+          selected = "imdb_rating"
         )
       ),
       shiny::column(
@@ -47,12 +47,37 @@ mod_base_vars_ui <- function(id) {
           selected = "genre"
         )
       )
-    )
+    ),
+    # put in UI ----
+      bs4Dash::box(icon = shiny::icon('robot'),
+        width = 12,
+        title =
+          shiny::tags$p(tags$code('base'),
+            tags$code('inputs')),
+        collapsible = TRUE,
+        collapsed = TRUE,
+        shiny::fluidRow(
+          shiny::column(
+            width = 12,
+          shiny::verbatimTextOutput(
+            outputId = shiny::NS(namespace = id, id = 'base'))
+          )
+        )
+      )
   )
 }
 
 mod_base_vars_server <- function(id) {
+
   shiny::moduleServer(id, function(input, output, session) {
+
+    output$base <- shiny::renderPrint({
+      vals <- shiny::reactiveValuesToList(
+        x = input, all.names = TRUE
+      )
+      print(vals)
+    })
+
     return(
       list(
         x = shiny::reactive({
