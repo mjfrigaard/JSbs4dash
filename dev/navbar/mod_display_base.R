@@ -9,8 +9,6 @@ plot_scatter_xyz <- function(df, x_var, y_var, col_var) {
   )
 }
 
-
-
 mod_display_base_ui <- function(id) {
   ns <- shiny::NS(id)
   shiny::tagList(
@@ -38,7 +36,7 @@ mod_display_base_ui <- function(id) {
       )
     ),
 # put in UI ----
-      bs4Dash::box(icon = shiny::icon('react'),
+      bs4Dash::box(icon = shiny::icon('robot'),
         width = 12,
         title =
           shiny::tags$p(tags$code('display'),

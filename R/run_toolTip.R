@@ -1,7 +1,7 @@
 #' Create tooltip app
 #'
 #' @return tooltip app (shinyBS)
-#' @export toolTipApp
+#' @export run_toolTip
 #'
 #' @importFrom shiny tagList fluidPage tags
 #' @importFrom shiny sidebarLayout sidebarPanel mainPanel
@@ -9,8 +9,8 @@
 #'
 #' @examples
 #' require(JSbs4dash)
-#' # toolTipApp()
-toolTipApp <- function() {
+#' # run_toolTip()
+run_toolTip <- function() {
   ui <- shiny::tagList(
     shiny::fluidPage(
       shiny::tags$h1("JSbs4dash:", code("tooltips")),

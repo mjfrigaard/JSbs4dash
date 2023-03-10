@@ -10,25 +10,20 @@ source("mod_display_title.R")
 
 # UI ------------------------------------------------------------
 ui <- bs4Dash::dashboardPage(
-  title = code("navbar"),
-  header = dashboardHeader(
-    rightUi = tags$li(
-      class = "navbar-collapse collapse dropdown",
-      tags$ul(
-        class = "nav navbar-nav sidebar-menu",
-        bs4SidebarMenuItem(
-          text = "Select variables",
-          tabName = "p1",
-          selected = TRUE
-        ),
-        bs4SidebarMenuItem(
-          text = "Customize points",
-          tabName = "p2"
-        ),
-        bs4SidebarMenuItem(
-          text = "Add title",
-          tabName = "p3"
-        )
+  # title = bs4Dash::bs4Jumbotron(title = "navbar",
+  #     # span("navbar", style = "font-size:14.0pt")
+  #   ),
+  header = bs4Dash::dashboardHeader(
+    title =
+      bs4Dash::bs4DashBrand(
+        title = span("navbar", style = "font-size:14.0pt"),
+        href = "https://github.com/RinteRface/bs4Dash/issues/108#issuecomment-772101031"
+      ),
+    shiny::div(
+      JSbs4dash::bs4DNavbarMenu(
+        JSbs4dash::bs4DNavbarTab(tabName = "p1", "Select Variables"),
+        JSbs4dash::bs4DNavbarTab(tabName = "p2", "Customize points"),
+        JSbs4dash::bs4DNavbarTab(tabName = "p3", "Add title")
       )
     )
   ),
@@ -47,11 +42,14 @@ ui <- bs4Dash::dashboardPage(
               mod_display_base_ui("display_p1")
             ),
             # put in UI ----
-            bs4Dash::box(icon = shiny::icon("react"),
+            bs4Dash::box(
+              icon = shiny::icon("robot"),
               width = 12,
               title =
-                shiny::tags$p(tags$code("p1"),
-                  tags$code("values")),
+                shiny::tags$p(
+                  tags$code("p1"),
+                  tags$code("values")
+                ),
               collapsible = TRUE,
               collapsed = TRUE,
               shiny::fluidRow(
